@@ -1,212 +1,126 @@
-# Frontend - Aplicación de Procesamiento de Imágenes
+# Frontend Next.js Application
 
-Esta es la aplicación frontend para el servicio de procesamiento de imágenes. Construida con Next.js 14, TailwindCSS y TypeScript, proporciona una interfaz moderna y responsive para gestionar y procesar imágenes.
+## Requisitos Previos
 
-## 🚀 Características
+- Node.js 18.x o superior
+- Git
 
-- 🔐 Autenticación de usuarios (registro e inicio de sesión)
-- 👤 Perfil de usuario
-- 🖼️ Galería de imágenes con vista previa
-- 🛠️ Opciones de procesamiento de imágenes:
-  - Redimensionamiento
-  - Rotación
-  - Volteo horizontal y vertical
-  - Conversión a escala de grises
-- 📱 Diseño responsive
-- 🎨 Interfaz moderna con Tailwind CSS
-- ⚡ Carga y procesamiento de imágenes en tiempo real
+## Tecnologías Principales
 
-## 📋 Prerrequisitos
+- Next.js 14.0.4
+- React 18.2.0
+- TypeScript
+- Tailwind CSS
 
-- Node.js (versión 18 o superior)
-- npm o yarn
-- Backend del servicio de procesamiento de imágenes corriendo en `http://localhost:3001`
+## Instalación
 
-## 🛠️ Instalación
-
-1. Clona el repositorio:
-   ```bash
-   git clone <url-del-repositorio>
-   cd frontend
-   ```
-
-2. Instala las dependencias:
-   ```bash
-   npm install
-   # o
-   yarn install
-   ```
-
-3. Crea un archivo `.env.local` en la raíz del proyecto:
-   ```env
-   NEXT_PUBLIC_API_URL=http://localhost:3001
-   ```
-
-## 🚀 Ejecución
-
-Para ejecutar en modo desarrollo:
+1. **Instalar dependencias del proyecto:**
 ```bash
-npm run dev
-# o
-yarn dev
+npm install @headlessui/react@1.7.17 @nestjs/config@3.1.1 @tailwindcss/aspect-ratio@0.4.2 @types/js-cookie@3.0.6 axios@1.6.2 js-cookie@3.0.5 next@14.0.4 react@18.2.0 react-dom@18.2.0 react-dropzone@14.2.3 react-hot-toast@2.4.1 react-intersection-observer@9.5.3
 ```
 
-Para construir y ejecutar en producción:
+2. **Instalar dependencias de desarrollo:**
 ```bash
-npm run build
-npm start
-# o
-yarn build
-yarn start
+npm install -D @types/node@20.10.4 @types/react@18.2.42 @types/react-dom@18.2.17 autoprefixer@10.4.16 eslint@8.55.0 eslint-config-next@14.0.4 postcss@8.4.32 tailwindcss@3.3.6 typescript@5.3.3
 ```
 
-La aplicación estará disponible en `http://localhost:3000`
+## Archivos de Configuración Necesarios
 
-## 📁 Estructura del Proyecto
+1. **Crear archivo tailwind.config.js en la raíz:**
+```javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+      },
+      fontFamily: {
+        sans: ['var(--font-sans)'],
+        mono: ['var(--font-mono)'],
+      },
+    },
+  },
+  plugins: [],
+}
+```
+
+2. **Crear archivo postcss.config.js en la raíz:**
+```javascript
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+```
+
+3. **Crear archivo .env en la raíz:**
+```env
+NODE_ENV=development
+NEXT_PUBLIC_API_URL=http://localhost:3001
+```
+
+## Estructura del Proyecto
 
 ```
 frontend/
 ├── src/
-│   ├── app/                    # Páginas y componentes principales
-│   │   ├── auth/              # Componentes de autenticación
-│   │   ├── gallery/           # Galería de imágenes
-│   │   └── profile/           # Perfil de usuario
-│   ├── components/            # Componentes reutilizables
-│   └── services/             # Servicios y llamadas a la API
-├── public/                   # Archivos estáticos
-└── styles/                  # Estilos globales
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   └── globals.css
+│   ├── components/
+│   ├── services/
+│   └── utils/
+├── public/
+├── tailwind.config.js
+├── postcss.config.js
+└── package.json
 ```
 
-## 🔒 Autenticación
+## Ejecutar el Proyecto
 
-La aplicación utiliza autenticación basada en tokens JWT. El token se almacena en:
-- localStorage para persistencia
-- cookies para acceso seguro
+```bash
+# Iniciar el servidor de desarrollo
+npm run dev
+```
 
-## 🖼️ Procesamiento de Imágenes
+El servidor de desarrollo estará disponible en: http://localhost:3000
 
-Las imágenes se pueden procesar con las siguientes opciones:
-- Redimensionar: Ajusta el ancho y alto
-- Rotar: Rotación en incrementos de 90 grados
-- Voltear: Horizontal o vertical
-- Escala de grises: Conversión a blanco y negro
+## Scripts Disponibles
 
-## 🎨 Estilos y UI
+- `npm run dev`: Inicia el servidor de desarrollo
+- `npm run build`: Construye la aplicación para producción
+- `npm start`: Inicia el servidor de producción
+- `npm run lint`: Ejecuta el linter
 
-- Utiliza Tailwind CSS para estilos
-- Componentes personalizados para consistencia
-- Diseño responsive para todas las pantallas
-- Temas y colores personalizables
+## Solución de Problemas Comunes
 
-## 🔧 Configuración
+1. **Error de módulos no encontrados:**
+```bash
+npm install
+```
 
-Puedes modificar la configuración en:
-- `next.config.js` para opciones de Next.js
-- `tailwind.config.js` para personalización de Tailwind
-- `.env.local` para variables de entorno
+2. **Error de Tailwind:**
+Verifica que los archivos de configuración existan y estén correctos:
+- tailwind.config.js
+- postcss.config.js
 
-## 📱 Responsive Design
+3. **Error de fuentes:**
+La fuente Geist está configurada a través de next/font/google
 
-La aplicación es completamente responsive y se adapta a:
-- 📱 Móviles (< 640px)
-- 📱 Tablets (640px - 1024px)
-- 💻 Escritorio (> 1024px)
+## Notas Importantes
 
-## 🤝 Contribución
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## 📝 Notas Adicionales
-
-- Asegúrate de que el backend esté corriendo antes de iniciar el frontend
-- Para desarrollo local, el backend debe estar en `http://localhost:3001`
-- Las imágenes procesadas se almacenan en el backend
-
-## 🐛 Solución de Problemas
-
-**Las imágenes no cargan:**
-- Verifica que el backend esté corriendo
-- Comprueba la URL del backend en `.env.local`
-- Verifica tu token de autenticación
-
-**Errores de autenticación:**
-- Limpia el localStorage y cookies
-- Intenta cerrar sesión y volver a iniciar sesión
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para detalles
-
-## 🐳 Docker
-
-### Requisitos para Docker
-- Docker instalado en tu sistema
-- Docker Compose (incluido en Docker Desktop para Windows y Mac)
-
-### Construcción y ejecución con Docker
-
-1. Construir y ejecutar con Docker Compose:
-   ```bash
-   docker-compose up --build
-   ```
-
-2. Solo ejecutar (si ya está construido):
-   ```bash
-   docker-compose up
-   ```
-
-3. Ejecutar en segundo plano:
-   ```bash
-   docker-compose up -d
-   ```
-
-4. Detener los contenedores:
-   ```bash
-   docker-compose down
-   ```
-
-### Construcción manual con Docker
-
-1. Construir la imagen:
-   ```bash
-   docker build -t image-processor-frontend .
-   ```
-
-2. Ejecutar el contenedor:
-   ```bash
-   docker run -p 3000:3000 -e NEXT_PUBLIC_API_URL=http://localhost:3001 image-processor-frontend
-   ```
-
-### Variables de entorno en Docker
-- `NEXT_PUBLIC_API_URL`: URL del backend (por defecto: http://localhost:3001)
-
-### Notas sobre Docker
-- La aplicación estará disponible en `http://localhost:3000`
-- Asegúrate de que el backend esté accesible desde el contenedor
-- Los cambios en el código requieren reconstruir la imagen
-
-### Solución de problemas con Docker
-
-#### Errores de ESLint durante la construcción
-Si encuentras errores de ESLint durante la construcción, tienes varias opciones:
-
-1. Usar la construcción sin linting:
-   ```bash
-   docker-compose build --build-arg DISABLE_ESLINT=true
-   ```
-
-2. Corregir los errores de ESLint localmente:
-   ```bash
-   npm run lint --fix
-   ```
-
-3. Ajustar las reglas de ESLint en `.eslintrc.json`
-
-#### Problemas comunes y soluciones
-- Si la construcción falla por errores de TypeScript, asegúrate de que todos los tipos estén correctamente definidos
-- Para problemas de memoria durante la construcción, aumenta los recursos de Docker
-- Si hay problemas de conexión con el backend, verifica la URL en las variables de entorno
+1. Asegúrate de tener Node.js 18.x o superior instalado
+2. El archivo `.env` debe estar configurado correctamente
+3. Ejecuta los comandos desde la raíz del proyecto
+4. Si encuentras errores de TypeScript, ejecuta:
+```bash
+npm install typescript@5.3.3 @types/node@20.10.4 @types/react@18.2.42 @types/react-dom@18.2.17
+```
