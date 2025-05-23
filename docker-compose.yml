@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: nextjs-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://host.docker.internal:3001
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
